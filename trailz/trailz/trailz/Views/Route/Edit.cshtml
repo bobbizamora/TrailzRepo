@@ -1,0 +1,113 @@
+﻿@model trailz.ViewModels.EditRouteViewModel
+
+@{
+    ViewData["Title"] = "Edit Your Route";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="~/Assets/logo_trailz.png" alt="Trailz" title="Trailz" width="72" height="72">
+        <h2>Edit Your Trail.</h2>
+        <p class="lead">Make changes to your favourite trail. </p>
+    </div>
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <input type="hidden" asp-for="Route.RouteID" />
+                <div class="form-group">
+                    <label asp-for="Route.RouteName" class="control-label"></label>
+                    <input asp-for="Route.RouteName" class="form-control" />
+                    <span asp-validation-for="Route.RouteName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Route.RouteTypeID" class="control-label"></label>
+                <select asp-for="Route.RouteTypeID" class="form-control" asp-items="Model.RouteType"></select>
+                <span asp-validation-for="Route.RouteTypeID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Route.Departure" class="control-label">Departure Location *</label>
+                <input asp-for="Route.Departure" class="form-control" />
+                <span asp-validation-for="Route.Departure" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Route.Arrival" class="control-label">Arrival Location *</label>
+                <input asp-for="Route.Arrival" class="form-control" />
+                <span asp-validation-for="Route.Arrival" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Route.Distance" class="control-label">Distance *</label>
+                <input asp-for="Route.Distance" class="form-control" />
+                <span asp-validation-for="Route.Distance" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Route.LevelID" class="control-label">Difficulty Level *</label>
+                <select asp-for="Route.LevelID" class="form-control" asp-items="Model.Level"></select>
+                <span asp-validation-for="Route.LevelID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Route.minElevation" class="control-label">Min. Elevation </label>
+                <input asp-for="Route.minElevation" class="form-control" />
+                <span asp-validation-for="Route.minElevation" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Route.maxElevation" class="control-label">Max. Elevation </label>
+                <input asp-for="Route.maxElevation" class="form-control" />
+                <span asp-validation-for="Route.maxElevation" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Route.Description" class="control-label">Description *</label>
+                <textarea asp-for="Route.Description" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Route.Description" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                @*<div class="mb-3">
+                    <div class="custom-file">
+                        <label asp-for="Picture" class="custom-file-label" for="customFile"><i class="fas fa-camera"></i> Add a Picture</label>
+                        <input type="file" asp-for="Picture" class="custom-file-input" width="50">
+                        <span asp-validation-for="Picture" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="custom-file">
+                        <label asp-for="GPXfile" class="custom-file-label" for="customFile"> <i class="fas fa-file"></i> Add a GPX File</label>
+                        <input type="file" asp-for="GPXfile" class="custom-file-input" width="50">
+                    </div>
+                </div>*@
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <button type="submit" class="btn btn-primary" value="save"><i class="fas fa-save"></i> Edit Your Trail</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <small class="text-muted">* are required fields.</small>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <a class="btn btn-primary" asp-action="Index"><i class="fas fa-list-ul"></i> My Trails</a>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

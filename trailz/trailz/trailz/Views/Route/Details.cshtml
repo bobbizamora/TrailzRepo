@@ -1,0 +1,108 @@
+﻿@model trailz.Models.Route
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--https://startbootstrap.com/previews/blog-post-->
+<div class="container">
+    <div class="row">
+        <!-- Route Content Column -->
+        <div class="col-lg-8">
+            <!-- Title -->
+            <h1 class="mt-4">@Html.DisplayFor(model => model.RouteName)</h1>
+            <!-- Author -->
+            <p class="lead">
+                by
+                <a>@Html.DisplayFor(model => model.LoggedInUser.FirstName)  @Html.DisplayFor(model => model.LoggedInUser.Name) </a>
+            </p>
+            <!-- Date/Time -->
+            <p>Posted on @Html.DisplayFor(model => model.RouteDate)</p>
+            <hr>
+            <!-- Preview Image -->
+            <img class="img-fluid rounded" src="/Assets/@Model.Picture" alt="Route @Html.DisplayFor(model => model.RouteName)" title="Route @Html.DisplayFor(model => model.RouteName)">
+            <hr>
+            <!-- Route Components -->
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <ul>
+                                <li><strong>Departure</strong></li>
+                                <li>@Html.DisplayFor(model => model.Departure)</li>
+                                <li><strong>Arrival</strong></li>
+                                <li>@Html.DisplayFor(model => model.Arrival)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <ul>
+                                <li><strong>min. Altitude</strong></li>
+                                <li>@Html.DisplayFor(model => model.minElevation) m</li>
+                                <li><strong>max. Altitide</strong></li>
+                                <li>@Html.DisplayFor(model => model.maxElevation) m</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Post Content -->
+            <h5 class="mt-0">Description</h5>
+
+            <p>@Html.DisplayFor(model => model.Description)</p>
+
+            <hr>
+           
+        </div>
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+            <!-- Activity Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Activity</h5>
+                <div class="card-body">
+                    <p>@Html.DisplayFor(model => model.RouteType.Name)</p>
+                </div>
+            </div>
+            <!-- Attributes Widget  -->
+            <div class="card my-4">
+                <h5 class="card-header">Available Attributes</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled mb-0">
+                                @foreach (var item in Model.RouteAttributes) {
+                                <li>
+                                    <a>@item.AttributeType.Name</a>
+                                </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Side Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Distance</h5>
+                <div class="card-body">
+                    <p>@Html.DisplayFor(model => model.Distance) km</p>
+                    <div class="row">
+                        @if(this.Model.GPXfile != null)
+                        { 
+                        <a class="btn btn-primary" asp-action="GetGPXDownload" asp-route-id="@Model.RouteID"><i class="fas fa-download"></i> Download GPX File</a> 
+                        }
+                        else {
+                         <p>There's no GPX file available for this route !</p>
+                        } 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.RouteID"><i class="fas fa-edit"></i> Edit</a>
+            <a class="btn btn-secondary" asp-action="Index"><i class="fas fa-list-ul"></i> My Trailz</a>
+        </div>
+    </div>
+</div>

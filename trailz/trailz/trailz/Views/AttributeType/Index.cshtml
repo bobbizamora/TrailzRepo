@@ -1,0 +1,37 @@
+﻿@model IEnumerable<trailz.Models.AttributeType>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1><i class="fas fa-route"></i> Route Attributes</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a class="btn btn-dark"  asp-action="Edit" asp-route-id="@item.AttributeTypeID"><i class="fas fa-edit"></i> Edit</a> 
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.AttributeTypeID"><i class="fas fa-trash-alt"></i> Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<p>
+    <a class="btn btn-primary" asp-action="Create"><i class="fas fa-plus"></i> Create New</a>
+    <a class="btn btn-primary" asp-controller="Route" asp-action="Index"><i class="fas fa-tachometer-alt"></i> Admin Dashboard</a>
+</p>

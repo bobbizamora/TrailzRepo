@@ -1,0 +1,100 @@
+﻿@model trailz.ViewModels.ListRoutesViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_LayoutStart";
+    
+}
+
+<div class="container">
+    
+    <!-- Filter Section-->
+    <section>
+        <div class="container">
+            <h2 class="font-weight-light"> Search a Route</h2>
+            <form asp-controller="Home" asp-action="Search" method="get">
+                <div class="form-row align-items-center p-3">
+                    <div class="col-auto">
+                        <input asp-for="NameSearch" placeholder="Route Name" class="form-control">
+                    </div>
+                    <div class="col-auto">
+                        <input asp-for="DepartureSearch" placeholder="Start Location" class="form-control">
+                    </div>
+                    <div class="col-auto">
+                        <input asp-for="ArrivalSearch" placeholder="Arrival Location" class="form-control">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-secondary" asp-controller="Home" asp-action="Index"><i class="fas fa-list"></i> All Routes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- All Routes List Section-->
+    <section>
+        <div class="container">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Routes[0].RouteDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Routes[0].RouteName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Routes[0].Distance)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Routes[0].Departure)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Routes[0].Arrival)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Routes[0].Level)
+                        </th>
+                        <th>
+                            Route Type
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Route route in Model.Routes)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => route.RouteDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => route.RouteName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => route.Distance) km
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => route.Departure)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => route.Arrival)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => route.Level.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => route.RouteType.Name)
+                            </td>
+                            <td>
+                                <a  asp-controller="Route" asp-action="Details" asp-route-id="@route.RouteID"><i class="fas fa-book-open"></i> Details</a> 
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

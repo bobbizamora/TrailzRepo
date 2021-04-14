@@ -1,0 +1,129 @@
+﻿@{
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="Trail, running, cycling, hiking, maps, routes">
+    <meta name="description" content="Trailz. Discover your world !" />
+    <meta name="author" content="Stijn Beckers" />
+    <title>@ViewData["Title"] - Trailz</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/startStyle.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+</head>
+<body>
+    <header>
+        <!--https://startbootstrap.com/snippets/video-header-->
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-white fixed-top">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="mb-2" src="~/Assets/logo_trailz.png" alt="Trailz" title="Trailz" width="30" height="30"> Trailz</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Route" asp-action="Create"><i class="fas fa-route"></i> Create a Route</a>
+                        </li>
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Route" asp-action="Index"><i class="fas fa-road"></i> My Trailz Dashboard</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="overlay"></div>
+        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4">
+        </video>
+        <div class="container h-100">
+            <div class="d-flex h-100 text-center align-items-center">
+                <div class="w-100 text-white">
+                    <h1 class="display-3">Explore better, Enjoy more ...</h1>
+                    <p class="lead">Create or search Routes for Running, Cycling, Hiking, ...</p>
+                    <p class="lead">
+                        <a class="btn btn-primary btn-xl js-scroll-trigger" asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-route"></i> Register now & Create a route</a>
+                        <a class="btn btn-primary btn-xl js-scroll-trigger" asp-area="Identity" asp-page="/Account/Login"><i class="fas fa-arrow-right"></i> Login</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Intro Section -->
+    <div class="container">
+        <div class="row gy-5">
+            <div class="col-lg-6">
+                <div class="p-5">
+                    <h2 class="font-weight-light">Plan, navigate and share your adventures</h2>
+                    <p class="lead">Trailz , a tangible response to a real demand. <br /><br />
+                    
+                        Offering a solid infrastructure, allowing a route to be discovered in a safe way,
+                        through well documented paths is what Trailz is proposing.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="p-5">
+                    <img class="img-fluid rounded" src="https://source.unsplash.com/XFneC_rHR48/1600x900" alt="Trailz" title="Trialz">
+                </div>
+
+            </div>
+            
+        </div>
+        <hr />
+    </div>
+    <!-- /.row -->
+    <!--end video-header-->
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="row">
+                <div class="col-12 col-md">
+                    <p><img class="mb-2" src="~/Assets/logo_trailz.png" alt="Trailz" title="Trailz" width="24" height="24"> Trailz</p>
+                    <small class="d-block mb-3 text-muted">&copy; @DateTime.Now.Year</small>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Features</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i>  Home</a></li>
+                        <li><a class="text-muted" asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-user-plus"></i>  Register</a></li>
+                        <li><a class="text-muted" asp-area="Identity" asp-page="/Account/Login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                        <li><a class="text-muted" asp-controller="Route" asp-action="Create"><i class="fas fa-route"></i> Create a route</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" asp-controller="Home" asp-action="Links"><i class="fas fa-link"></i> Usefull Links</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>About</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" asp-controller="Home" asp-action="Team"><i class="fas fa-user-friends"></i> Team</a></li>
+                        <li><a class="text-muted" asp-controller="Home" asp-action="Support"><i class="fas fa-info-circle"></i> Support</a></li>
+                        <li><a class="text-muted" asp-controller="Home" asp-action="Privacy"><i class="fas fa-key"></i> Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
